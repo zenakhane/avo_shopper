@@ -1,4 +1,4 @@
-module.exports = function(pool) {
+module.exports = function avoDeals(pool) {
 
 	async function createShop(shopName) {
 		const result = await pool.query(`insert into shop (name) values ($1) returning id`, [shopName]);
@@ -30,8 +30,7 @@ module.exports = function(pool) {
 	}
 
 	async function createDeal(shopId, qty, price) {
-		await pool.query(`insert into avo_deal (shop_id, qty, price) values ($1, $2, $3)`, 
-			[shopId, qty, price]);
+		await pool.query(`insert into avo_deal (shop_id, qty, price) values ($1, $2, $3)`, [shopId, qty, price]);
 	}
 
 	async function recommendDeals(amount) {

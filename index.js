@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
-
+const { Pool } = require('pg');
+const avocados = require('./avo-shopper')
 const app = express();
 const PORT =  process.env.PORT || 3019;
 
@@ -17,6 +18,7 @@ app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
 
 let counter = 0;
+let avos = avocados(Pool)
 
 app.get('/', function(req, res) {
 	res.render('index', {
@@ -24,6 +26,14 @@ app.get('/', function(req, res) {
 	});
 });
 
+app.get('/add',async function(req, res){
+    res.render('add', {
+  })
+})
+
+app.post('/add/shopAdd', function(req,res){
+  res.redirect('shopAdd')
+})
 // start  the server and start listening for HTTP request on the PORT number specified...
 app.listen(PORT, function() {
 	console.log(`AvoApp started on port ${PORT}`)
